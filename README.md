@@ -1,1 +1,1 @@
-# HackOFF 3.0
+# Crop Detector
