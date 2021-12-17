@@ -1,39 +1,136 @@
 {% extends "base.html" %} {% block content %}
 <html>
-<head>
-<style>
-        body {
-            background: url('https://images.unsplash.com/photo-1573546008686-d56635340ad5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1949&q=80');
-        }
-    </style>
-</head>
-<h1 align="center">Please Choose the Leaf Picture</h1>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title> CropDoc</title>
+          <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+          <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+          <link rel="preconnect" href="https://fonts.gstatic.com">
+          <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Oswald&display=swap" rel="stylesheet">
+      </head>
+      <body>
+      
+          <section id="banner">
+              <div class="website-name-tag">
+                  <h1 class="website-name">CropDoc</h1>
+                  <p class="tag">An AI Solution to Detect your Crop's Disease.</p>
+              </div>
+              
+              <div class="banner-text">
+                  <h1>Crop Malady Detector </h1>
+                  <p>Healthy Crops give Good Yeild</p>
+                  <div class="banner-btn">
+                      <a href="#"> <span> </span> Learn More &#187;</a>
+      
+                  </div>
+      
+              </div>
+          </section>
+          <div id="menubtn">
+              <img src="{{url_for('static', filename='assets/menu.png')}}" id="menu" onclick="openMenu()">
+      
+          </div>
+          <div style="display:none" id="sidenav">
+              <nav>
+                  <ul>
+                      <li><a href="#">Home</a></li>
+                      <li><a href="#features">Features</a></li>
+                      <li><a href="#">About Us</a></li>
+                      <li><a href="#contact">Contact us</a></li>
+                      <li><a href="#">Testimonials</a></li>
+                  </ul>
+              </nav>
+      
+          </div>
+      
+          <!-- Diagnosis Section -->
+          <section class="diagnosis" id="diagnosis">
+              <div class="diagnosis-container">
+                  <img src="{{url_for('static', filename='assets/magnify.png')}}">
+                  <h1 class="diagnosis-title">Diagnose your crop's disease now</h1>
+                  <!-- href="/index.html" -->
+                  <a class="diagnosis-btn" href="/diagnose" >Diagnose &#187;</a>
+              </div>
+          </section>
+      
+          <!-- Features  -->
+          <section class="features" id="features">
+              <h1>Why CropDoc?</h1>
+              <div class="our-features">
+                  <img src="{{url_for('static', filename='assets/moneysaving.png')}}" class="features-icons">
+                  <div class="feature-details">
+                      <h3 class="feature-title">Save money</h3>
+                      <p class="title-details">Eliminating the need of crop specialists, and thus, saving money.</p>
+                  </div>
+              </div>
+              <div class="our-features">
+                  <img src="{{url_for('static', filename='assets/clock.png')}}" class="features-icons">
+                  <div class="feature-details">
+                      <h3 class="feature-title">Time saving</h3>
+                      <p class="title-details">Reliable results at much lesser time.</p>
+                  </div>
+              </div>
+          </section>
+      
+          
+      
+          <!-- Contact Section -->
+          <section class="contact-section" id="contact">
+              <div class="heading">
+                  <h3>Contact us</h3>
+              </div>
+      
+              <div class="contact-parameters">
+                  <div class="parameters">
+                      <div class="param-alignment">
+                          <img src="{{url_for('static', filename='assets/location.png')}}" class="logos">
+                          <div class="info">
+                              <h3 class="address-title">Location:</h3>
+                              <p class="address">IIT(ISM) Dhanbad</p>
+                          </div>
+                      </div>
+                  </div>
+      
+                  <div class="parameters">
+                      <div class="param-alignment">
+                          <img src="{{url_for('static', filename='assets/mail.png')}}" class="logos">
+                          <div class="info">
+                              <h3 class="address-title">Email:</h3>
+                              <p class="address">info@gmail.com</p>
+                          </div>
+                      </div>
+                  </div>
+      
+                  <div class="parameters">
+                      <div class="param-alignment">
+                          <img src="{{url_for('static', filename='assets/phone.png')}}" class="logos">
+                          <div class="info">
+                              <h3 class="address-title">Call us:</h3>
+                              <p class="address">+91 3535 522 532</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+      
+          <script>
+              function openMenu() {
+                  var menuList = document.getElementById("sidenav");
+                  if (menuList.style.display == "none") {
+                      menuList.style.display = "block";
+                      menuList.style.transition = "width 3s";
+                  }
+                  else {
+                      menuList.style.display = "none";
+                      menuList.style.transition = "width 3s";
+                  }
+              }
+          </script>
+      
+      
+      
+      
+      </body>
 
-<div align="center">
-    <form id="upload-file" method="post" enctype="multipart/form-data">
-        <label for="imageUpload" class="upload-label">
-            Choose...
-        </label>
-        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
-    </form>
-
-    <div class="image-section" style="display:none;">
-        <div class="img-preview">
-            <div id="imagePreview">
-            </div>
-        </div>
-        <div>
-            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
-        </div>
-    </div>
-
-    <div class="loader" style="display:none;"></div>
-
-    <h3 id="result">
-        <span> </span>
-    </h3>
-<br><br>
-        <a href="https://ishalgarg.github.io/"><button>Click to know more</button></a>
-</div>
 </html>
 {% endblock %}

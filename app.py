@@ -41,6 +41,12 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/diagnose')
+def index1():
+    # Main page
+    return render_template('diagnose.html')
+
+
 @app.route('/predict', methods=['POST'])
 def upload():
     # Get the file from post request
